@@ -15,17 +15,20 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
-    "vuesax": "^4.0.1-alpha.8",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "boxicons": "^2.0.5",
+    "nuxt": "^2.0.0",
+    "vuesax": "^4.0.1-alpha.8"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.6.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2",
     "standard-version": "^8.0.0"
   }
 }

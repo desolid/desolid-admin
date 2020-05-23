@@ -1,55 +1,66 @@
 <template>
     <div>
-        <nuxt />
+        <Navbar />
+        <div class="content">
+            <Sidebar />
+            <nuxt />
+        </div>
     </div>
 </template>
 
-<style>
-html {
-    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-        sans-serif;
-    font-size: 16px;
+<script lang="ts">
+import Vue from 'vue';
+import Navbar from '~/components/Navbar.vue';
+import Sidebar from '~/components/Sidebar.vue';
+
+export default Vue.extend({
+    components: {
+        Navbar,
+        Sidebar,
+    },
+});
+</script>
+
+<style src="~/assets/styles/variables.scss" lang="scss"></style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap');
+
+* {
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+        Droid Sans, Helvetica Neue, sans-serif;
     word-spacing: 1px;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
+    font-weight: 100;
     margin: 0;
 }
 
-.button--green {
-    display: inline-block;
-    border-radius: 4px;
-    border: 1px solid #3b8070;
-    color: #3b8070;
-    text-decoration: none;
-    padding: 10px 30px;
+html {
+    background: var(--vs-theme-bg2);
 }
 
-.button--green:hover {
-    color: #fff;
-    background-color: #3b8070;
+p {
+    font-size: 0.85rem;
 }
 
-.button--grey {
-    display: inline-block;
-    border-radius: 4px;
-    border: 1px solid #35495e;
-    color: #35495e;
-    text-decoration: none;
-    padding: 10px 30px;
-    margin-left: 15px;
+h1 {
+    font-size: 35px;
+    font-weight: 600;
 }
 
-.button--grey:hover {
-    color: #fff;
-    background-color: #35495e;
+.content {
+    background-color: var(--vs-theme-bg) !important;
+    margin-left: 260px;
+    padding-left: 0 !important;
+    display: block;
+    margin-top: 57px;
+    position: relative;
+    margin-bottom: 0;
+    padding-top: 200px !important;
+    transition: all 0.25s ease;
+    width: calc(100% - 260px);
 }
 </style>
