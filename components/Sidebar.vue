@@ -17,7 +17,10 @@
         <div class="content-sidebar">
             <slot name="top" />
             <ul class="sidebar-links">
-                <li>item1<i class="bx bx-chevron-right"></i></li>
+                <li>
+                    <box-icon name='heart' type='solid' ></box-icon>
+                    item1
+                </li>
             </ul>
             <slot name="bottom" />
         </div>

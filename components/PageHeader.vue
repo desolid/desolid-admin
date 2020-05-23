@@ -3,7 +3,9 @@
         <div class="header__content container">
             <div ref="flex" class="flex-header">
                 <h1 ref="title" id="header-title">{{title}}</h1>
-                <div class="right-content">{{right}}</div>
+                <div class="actions">
+                    <slot />
+                </div>
             </div>
         </div>
         <svg
@@ -27,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    props: ['title', 'right'],
+    props: ['title'],
 });
 </script>
 <style lang="scss" scoped>
@@ -62,7 +64,7 @@ export default Vue.extend({
                 // padding: 13px 0 15px;
                 // font-weight: 600;
             }
-            .right-content {
+            .actions {
                 display: flex;
                 align-items: center;
                 justify-content: center;

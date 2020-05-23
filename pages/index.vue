@@ -1,6 +1,9 @@
 <template>
     <div>
-        <PageHeader title="Item 1" right="2565" />
+        <PageHeader title="Item 1">
+            13245&nbsp;
+            <box-icon name='heart' type='solid' ></box-icon>
+        </PageHeader>
         <div class="container content">
             <slot name="top" />
             <h2>Header2</h2>
