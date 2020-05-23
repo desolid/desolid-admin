@@ -1,5 +1,5 @@
 <template>
-  <div>here</div>
+    <div>here</div>
 </template>
 
 <script>
@@ -7,9 +7,9 @@
 // import VuesaxLogo from '~/components/VuesaxLogo.vue'
 
 export default {
-  components: {
-    // Logo,
-    // VuesaxLogo
-  }
-}
+    components: {
+        // Logo,
+        // VuesaxLogo
+    },
+};
 </script>

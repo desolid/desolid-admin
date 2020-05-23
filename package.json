@@ -8,6 +8,10 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
+    "format": "prettier --write \"**/*.js\" \"**/*.ts\" \"**/*.vue\" \"**/*.scss\"",
+    "release:patch": "standard-version --release-as patch && git push && git push --tags",
+    "release:minor": "standard-version --release-as minor && git push && git push --tags",
+    "release:major": "standard-version --release-as major && git push && git push --tags",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -21,6 +25,7 @@
     "@nuxt/typescript-build": "^0.6.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "standard-version": "^8.0.0"
   }
 }
