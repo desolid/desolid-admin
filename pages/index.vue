@@ -3,7 +3,7 @@
         <PageHeader title="Item 1" right="2565" />
         <div class="container content">
             <slot name="top" />
-            <h2>hereeklkj</h2>
+            <h2>Header2</h2>
             <vs-button v-for="i in 50" :key="i">Hello World Vuesax + Nuxtjs {{i}}</vs-button>
         </div>
     </div>
