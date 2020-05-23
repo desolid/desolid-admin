@@ -1,11 +1,17 @@
 <template>
     <div class="navbar">
-        <img
-            src="https://desolid.netlify.app/logo_outline.png"
-            alt="Desolid"
-            class="logo"
-            height="32"
-        />
+        <div class="brand">
+            <img
+                src="https://desolid.netlify.app/logo_outline.png"
+                alt="Desolid"
+                class="logo"
+                height="32"
+            />
+            <span class="brand-title">D E S O L I D</span>
+        </div>
+        <vs-avatar #text>
+            Evan You
+        </vs-avatar>
     </div>
 </template>
 
@@ -32,9 +38,20 @@ export default Vue.extend({});
     justify-content: center;
     border-radius: 0 0 30px 0;
     transition: all 0.25s ease;
-    justify-content: flex-start;
-    h2 {
-        font-size: 0.5rem;
+    justify-content: space-between;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    .brand-title {
+        margin-left: 6px;
+        // font-weight: 700;
+        font-size: 16px;
+        font-family: monospace;
+        background-color: black;
+        color: white;
+        border-radius: 3px;
+        padding: 3px 12px;
     }
 }
 </style>

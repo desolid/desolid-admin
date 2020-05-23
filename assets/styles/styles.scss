@@ -1,11 +1,11 @@
 :root {
-    --vs-primary: 26, 92, 255;
+    // --vs-primary: 26, 92, 255;
     --vs-theme-bg: #f4f7f8;
-    --vs-theme-color: #2c3e50;
+    --vs-theme-text-color: #2c3e50;
     --vs-theme-layout: #fff;
     --vs-theme-bg2: #eef2f5;
-    --vs-theme-code: #3f3d56;
-    --vs-theme-code2: #363449;
+    // --vs-theme-code: #3f3d56;
+    // --vs-theme-code2: #363449;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -22,7 +22,6 @@
     font-weight: 400;
     margin: 0;
     transition: all 0.25s ease;
-    color: var(--vs-theme-color);
 }
 
 html {
@@ -42,12 +41,12 @@ body {
     width: calc(100% - 260px);
 }
 
-
 p {
     font-size: 0.85rem;
 }
 
 h1 {
+    color: var(--vs-theme-text-color);
     font-size: 35px;
     font-weight: 600;
     &:hover {
@@ -56,6 +55,7 @@ h1 {
 }
 
 h2 {
+    color: var(--vs-theme-text-color);
     font-size: 1.5rem;
     padding-bottom: 0.3rem;
     border-bottom: 1px solid #eaecef;

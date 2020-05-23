@@ -18,12 +18,24 @@
             <slot name="top" />
             <ul class="sidebar-links">
                 <li>
-                    <box-icon name='heart' type='solid' ></box-icon>
-                    item1
+                    <box-icon name="heart"></box-icon>&nbsp;
+                    The graet item 1
+                </li>
+                <li>
+                    <box-icon name="heart"></box-icon>&nbsp;
+                    The graet item 2
+                </li>
+                <li>
+                    <box-icon name="heart"></box-icon>&nbsp;
+                    The graet item 3
                 </li>
             </ul>
             <slot name="bottom" />
         </div>
+        <vs-alert>
+            <template #title>Wellcome to desolid</template>
+            Lorem ipsum dolor sit amet, consectetur adipiscin.
+        </vs-alert>
     </aside>
 </template>
 
@@ -44,6 +56,7 @@ export default Vue.extend({});
     padding-left: 1.2em;
 }
 .sidebar {
+    padding: 1.5rem 0;
     background: var(--vs-theme-layout);
     width: 260px;
     position: fixed;
@@ -65,7 +78,7 @@ export default Vue.extend({});
         .sidebar-links {
             padding: 1.5rem 0;
             li {
-                color: var(--vs-theme-color);
+                color: var(--vs-theme-text-color);
                 transition: color 0.15s ease;
                 cursor: pointer;
                 font-size: 1em;

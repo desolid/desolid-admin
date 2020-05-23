@@ -3,7 +3,7 @@
         <div class="header__content container">
             <div ref="flex" class="flex-header">
                 <h1 ref="title" id="header-title">{{title}}</h1>
-                <div class="actions">
+                <div class="actions text">
                     <slot />
                 </div>
             </div>
