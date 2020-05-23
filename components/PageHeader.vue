@@ -73,17 +73,6 @@ export default Vue.extend({
                 margin: 0;
             }
         }
-        &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%);
-            width: 110%;
-            height: 100%;
-            z-index: -1;
-            box-shadow: 0 25px 20px -25px rgba(0, 0, 0, 0.1);
-        }
     }
     .header-effect {
         position: absolute;

@@ -9,15 +9,20 @@
             />
             <span class="brand-title">D E S O L I D</span>
         </div>
-        <vs-avatar #text>
-            Evan You
-        </vs-avatar>
+        <div>
+            <UserNav />
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-export default Vue.extend({});
+import UserNav from '~/components/UserNav.vue';
+export default Vue.extend({
+    components: {
+        UserNav,
+    },
+});
 </script>
 
 <style lang="scss" scoped>
