@@ -17,25 +17,47 @@
         <div class="content-sidebar">
             <slot name="top" />
             <ul class="sidebar-links">
-                <li>
-                    <box-icon name="heart"></box-icon>&nbsp;
-                    The graet item 1
+                <li class="sidebar-heading">
+                    <box-icon name="home"></box-icon>&nbsp;
+                    Home
                 </li>
                 <li>
-                    <box-icon name="heart"></box-icon>&nbsp;
-                    The graet item 2
+                    <section>
+                        <p class="sidebar-heading">
+                            <box-icon name="data"></box-icon>&nbsp;
+                            Data models
+                            <!-- <box-icon name="chevron-right" size="sm"></box-icon> -->
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="#" class="sidebar-items">
+                                    Posts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-items">
+                                    Categories
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="sidebar-items">
+                                    Comments
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
                 </li>
-                <li>
-                    <box-icon name="heart"></box-icon>&nbsp;
-                    The graet item 3
+                <li class="sidebar-heading">
+                    <box-icon name="images"></box-icon>&nbsp;
+                    Files
                 </li>
             </ul>
             <slot name="bottom" />
         </div>
-        <vs-alert>
+        <!-- <vs-alert>
             <template #title>Wellcome to desolid</template>
             Lorem ipsum dolor sit amet, consectetur adipiscin.
-        </vs-alert>
+        </vs-alert>-->
     </aside>
 </template>
 
@@ -77,7 +99,7 @@ export default Vue.extend({});
         max-height: 100%;
         .sidebar-links {
             padding: 1.5rem 0;
-            li {
+            .sidebar-heading {
                 color: var(--vs-theme-text-color);
                 transition: color 0.15s ease;
                 cursor: pointer;
@@ -91,6 +113,15 @@ export default Vue.extend({});
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
+            }
+            .sidebar-items {
+                margin-left: 36px;
+                color: #969fa8;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                font-weight: 100;
+                text-decoration: none;
             }
         }
     }
