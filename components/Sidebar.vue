@@ -30,19 +30,13 @@
                         </p>
                         <ul>
                             <li>
-                                <a href="#" class="sidebar-items">
-                                    Posts
-                                </a>
+                                <a href="#" class="sidebar-items">Posts</a>
                             </li>
                             <li>
-                                <a href="#" class="sidebar-items">
-                                    Categories
-                                </a>
+                                <a href="#" class="sidebar-items">Categories</a>
                             </li>
                             <li>
-                                <a href="#" class="sidebar-items">
-                                    Comments
-                                </a>
+                                <a href="#" class="sidebar-items">Comments</a>
                             </li>
                         </ul>
                     </section>
@@ -52,12 +46,15 @@
                     Files
                 </li>
             </ul>
-            <slot name="bottom" />
         </div>
         <!-- <vs-alert>
             <template #title>Wellcome to desolid</template>
             Lorem ipsum dolor sit amet, consectetur adipiscin.
         </vs-alert>-->
+        <a href="https://desolid.netlify.app/" target="_blank" class="bottom-panel">
+            <box-icon type="solid" name="flame" size="sm" color="gray"></box-icon>&nbsp;by&nbsp;
+            <strong>desolid</strong>&nbsp;v1.2.0
+        </a>
     </aside>
 </template>
 
@@ -136,5 +133,21 @@ export default Vue.extend({});
     top: -2px;
     pointer-events: none;
     fill: var(--vs-theme-layout);
+}
+.bottom-panel {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace !important;
+    text-decoration: none;
+    color: gray;
+    strong {
+        font-family: monospace !important;
+        font-weight: bold;
+    }
 }
 </style>
