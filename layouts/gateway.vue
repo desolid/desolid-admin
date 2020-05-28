@@ -1,9 +1,6 @@
 <template>
-    <div>
-        <Navbar />
-        <div>
-            <nuxt />
-        </div>
+    <div class="layout">
+        <nuxt />
     </div>
 </template>
 
@@ -21,3 +18,12 @@ export default Vue.extend({
 </script>
 
 <style src="~/assets/styles/styles.scss" lang="scss"></style>
+<style lang="scss" scoped>
+.layout {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>

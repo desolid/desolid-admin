@@ -1,6 +1,6 @@
 <template>
     <div class="navbar">
-        <div class="brand">
+        <a href="/" class="brand">
             <img
                 src="https://desolid.netlify.app/logo_outline.png"
                 alt="Desolid"
@@ -8,7 +8,7 @@
                 height="32"
             />
             <span class="brand-title">D E S O L I D</span>
-        </div>
+        </a>
         <div>
             <UserNav />
         </div>
@@ -48,6 +48,7 @@ export default Vue.extend({
 .brand {
     display: flex;
     align-items: center;
+    text-decoration: none;
     .brand-title {
         margin-left: 6px;
         // font-weight: 700;
