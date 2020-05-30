@@ -40,6 +40,9 @@ import PageHeader from '~/components/PageHeader.vue';
 export default Vue.extend({
     layout: 'dashboard',
     middleware: 'auth',
+    async fetch({ params, store }) {
+        await store.dispatch('system/getModels');
+    },
     components: {
         PageHeader,
     },

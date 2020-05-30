@@ -11,6 +11,7 @@ const storage = store.namespace('auth');
 })
 export default class Auth extends VuexModule {
     user = storage.get('user');
+    
     @Mutation
     setUser(value) {
         this.user = value;

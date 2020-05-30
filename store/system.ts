@@ -10,9 +10,17 @@ const storage = store.namespace('system');
     namespaced: true,
 })
 export default class System extends VuexModule {
+    models = [];
+
     get info() {
         return storage.get('info');
     }
+
+    @Mutation
+    setModels(value) {
+        this.models = value;
+    }
+
     @Action({ rawError: true })
     async getInfo() {
         const result = await backend.query({
@@ -31,5 +39,31 @@ export default class System extends VuexModule {
         } = result;
         storage.set('info', system);
         return system;
+    }
+    @Action({ rawError: true })
+    async getModels() {
+        const result = await backend.query({
+            query: gql`
+                {
+                    system {
+                        models {
+                            name
+                            fields {
+                                name
+                                type
+                            }
+                        }
+                    }
+                }
+            `,
+            fetchPolicy: 'no-cache',
+        });
+        const {
+            data: {
+                system: { models },
+            },
+        } = result;
+        this.context.commit('setModels', models);
+        return models;
     }
 }

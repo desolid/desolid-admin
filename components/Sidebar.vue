@@ -29,14 +29,8 @@
                             <!-- <box-icon name="chevron-right" size="sm"></box-icon> -->
                         </p>
                         <ul>
-                            <li>
-                                <a href="#" class="sidebar-items">Posts</a>
-                            </li>
-                            <li>
-                                <a href="#" class="sidebar-items">Categories</a>
-                            </li>
-                            <li>
-                                <a href="#" class="sidebar-items">Comments</a>
+                            <li v-for="(model, index) in $store.state.system.models" :key="index">
+                                <a href="#" class="sidebar-items">{{model.name}}</a>
                             </li>
                         </ul>
                     </section>

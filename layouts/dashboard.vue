@@ -3,7 +3,7 @@
         <Navbar />
         <div>
             <Sidebar />
-            <nuxt/>
+            <nuxt />
         </div>
     </div>
 </template>
