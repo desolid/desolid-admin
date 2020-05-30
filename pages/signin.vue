@@ -58,7 +58,7 @@ export default Vue.extend({
                 this.hasError = false;
                 await this.authenticate({ email: this.email, password: this.password });
                 const { $vs } = this as any;
-                this.$router.push('/home');
+                this.$router.push('/');
                 $vs.notification({
                     title: `You are authenticated`,
                     text: `Wellcome to desolid admin zone 🤖`,
