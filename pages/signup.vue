@@ -1,19 +1,25 @@
 
 
 <template>
-    <form class="signin card" @submit.prevent="signin">
+    <form class="signup card" @submit.prevent="signup">
         <header>
             <img src="/logo.png" alt="Desolid" class="logo" height="64" />
             <br />
         </header>
         <br />
-        <vs-alert v-if="hasError" color="dark" relief :hidden-content="true">
+        <vs-alert v-if="error" color="dark" relief :hidden-content="true">
             <template #icon>
                 <!-- <box-icon name="error" color="rgba(var(--vs-color), 1)"></box-icon> -->
                 <box-icon name="error" color="white"></box-icon>
             </template>
-            <template #title>Authentication failed !</template>
+            <template #title>{{error}}</template>
         </vs-alert>
+        <br />
+        <vs-input type="text" v-model="name" placeholder="Name" name="name" required>
+            <template #icon>
+                <box-icon name="user" color="#606161"></box-icon>
+            </template>
+        </vs-input>
         <br />
         <vs-input type="email" v-model="email" placeholder="email" name="email" required>
             <template #icon>@</template>
@@ -31,7 +37,7 @@
             </template>
         </vs-input>
         <br />
-        <vs-button block color="dark" :loading="loading">Sign in</vs-button>
+        <vs-button block color="dark" :loading="loading">Create Admin</vs-button>
     </form>
 </template>
 
@@ -45,28 +51,27 @@ export default Vue.extend({
     layout: 'gateway',
     middleware: 'systemStatus',
     data: () => ({
+        name: '',
         email: '',
         password: '',
-        hasError: false,
+        error: '',
         loading: false,
     }),
     methods: {
-        ...mapActions('auth', ['authenticate']),
-        async signin(event: Event) {
+        ...mapActions('auth', ['createUser']),
+        async signup(event: Event) {
             this.loading = true;
             try {
-                this.hasError = false;
-                await this.authenticate({ email: this.email, password: this.password });
+                this.error = '';
+                await this.createUser({ name: this.name, email: this.email, password: this.password, group: 'Admin' });
                 const { $vs } = this as any;
-                this.$router.push('/home');
                 $vs.notification({
-                    title: `You are authenticated`,
-                    text: `Wellcome to desolid admin zone 🤖`,
-                    // position: 'bottom-center',
-                    // color: 'dark',
+                    title: `Admin user created`,
+                    text: `Sign in to enter the admin zone 🤖`,
                 });
+                this.$router.push('/signin');
             } catch (error) {
-                this.hasError = true;
+                this.error = `Creating user failed !`;
                 console.log({ error });
             }
             this.loading = false;
@@ -76,7 +81,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.signin {
+.signup {
     min-width: 360px;
     background-color: white;
     padding: 36px;

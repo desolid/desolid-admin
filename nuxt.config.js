@@ -1,5 +1,8 @@
 export default {
     mode: 'spa',
+    server: {
+        port: 8000, // default: 3000
+    },
     /*
      ** Headers of the page
      */
@@ -9,6 +12,7 @@ export default {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+            { id: 'API_URL', content: 'http://localhost:3000' },
         ],
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
@@ -23,7 +27,7 @@ export default {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: ['@/plugins/vuesax'],
+    plugins: [{ src: '@/plugins/vuesax', ssr: false }],
     /*
      ** Nuxt.js dev-modules
      */
@@ -32,17 +36,8 @@ export default {
      ** Nuxt.js modules
      */
     modules: [
-        // Doc: https://axios.nuxtjs.org/usage
-        '@nuxtjs/axios',
         // '@nuxtjs/pwa',
-        // Doc: https://github.com/nuxt-community/dotenv-module
-        '@nuxtjs/dotenv',
     ],
-    /*
-     ** Axios module configuration
-     ** See https://axios.nuxtjs.org/options
-     */
-    axios: {},
     /*
      ** Build configuration
      */

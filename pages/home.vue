@@ -39,6 +39,7 @@ import PageHeader from '~/components/PageHeader.vue';
 
 export default Vue.extend({
     layout: 'dashboard',
+    middleware: 'auth',
     components: {
         PageHeader,
     },
