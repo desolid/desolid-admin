@@ -52,7 +52,7 @@
             Lorem ipsum dolor sit amet, consectetur adipiscin.
         </vs-alert>-->
         <a href="https://desolid.netlify.app/" target="_blank" class="bottom-panel">
-            <box-icon type="solid" name="flame" size="sm" color="gray"></box-icon>by&nbsp;
+            <box-icon type="solid" name="flame" size="sm" color="gray"></box-icon>&nbsp;by&nbsp;
             <!-- <strong>desolid</strong>&nbsp;v1.2.0 -->
             <strong>DESOLID</strong>
         </a>

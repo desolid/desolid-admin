@@ -14,6 +14,7 @@ export default class Auth extends VuexModule {
     @Mutation
     setUser(value) {
         this.user = value;
+        storage.set('user', value);
     }
 
     @Action({ rawError: true })
@@ -35,7 +36,6 @@ export default class Auth extends VuexModule {
             },
         } = result;
         storage.set('token', token);
-        storage.set('user', user);
         this.context.commit('setUser', user);
     }
 
@@ -54,5 +54,10 @@ export default class Auth extends VuexModule {
             },
         } = result;
         return id;
+    }
+
+    @Action({ rawError: true })
+    async signout() {
+        this.context.commit('setUser', null);
     }
 }

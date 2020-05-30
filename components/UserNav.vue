@@ -1,13 +1,13 @@
 <template>
-    <vs-tooltip bottom shadow not-hover v-model="showTooltip">
-        <vs-avatar #text @click="showTooltip=!showTooltip">Evan You</vs-avatar>
+    <vs-tooltip v-if="$store.state.auth.user" shadow bottom not-hover v-model="showTooltip">
+        <vs-avatar #text @click="showTooltip=!showTooltip">{{$store.state.auth.user.name}}</vs-avatar>
         <template #tooltip>
-            <div class="content-tooltip">
-                <h4 class="center">Confirm</h4>
-                <p>You are sure to delete this user, by doing so you cannot recover the data</p>
+            <div class="user-nav-tooltip">
+                <box-icon name="user" size="lg" color="gray"></box-icon>
+                <h4>{{$store.state.auth.user.name}}</h4>
+                <br />
                 <footer>
-                    <vs-button @click="showTooltip=false" danger block>Delete</vs-button>
-                    <vs-button @click="showTooltip=false" transparent dark block>Cancel</vs-button>
+                    <vs-button @click="signout" flat dark block>Sign Out</vs-button>
                 </footer>
             </div>
         </template>
@@ -20,11 +20,24 @@ export default Vue.extend({
     data: () => ({
         showTooltip: false,
     }),
+    methods: {
+        async signout() {
+            this.showTooltip = false;
+            await this.$nextTick();
+            this.$store.dispatch('auth/signout');
+            this.$router.push('/signin');
+        },
+    },
 });
 </script>
 
 <style lang="scss" scoped>
 .vs-tooltip-content {
     cursor: pointer;
+}
+</style>
+<style lang="scss">
+.user-nav-tooltip {
+    padding: 12px;
 }
 </style>
