@@ -1,9 +1,9 @@
 <template>
     <div>
-        <!-- <PageHeader title="Wellcome">
+        <PageHeader title="Model">
             13245&nbsp;
             <box-icon name="heart" type="solid"></box-icon>
-        </PageHeader>-->
+        </PageHeader>
         <div class="container content">
             <vs-alert dark>
                 <template #title>Wellcome to DESOLID</template>
@@ -18,7 +18,7 @@ import Vue from 'vue';
 import PageHeader from '~/components/PageHeader.vue';
 
 export default Vue.extend({
-    layout: 'home',
+    layout: 'dashboard',
     middleware: 'auth',
     async fetch({ params, store }) {
         await store.dispatch('system/getModels');
@@ -40,6 +40,6 @@ export default Vue.extend({
         line-height: 1.7;
         font-size: 0.85rem;
     }
-    min-height: calc( 100vh - 200px);
+    min-height: calc( 100vh - 270px);
 }
 </style>

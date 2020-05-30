@@ -17,9 +17,11 @@
         <div class="content-sidebar">
             <slot name="top" />
             <ul class="sidebar-links">
-                <li class="sidebar-heading">
-                    <box-icon name="home"></box-icon>&nbsp;
-                    Home
+                <li>
+                    <nuxt-link to="/" class="sidebar-heading">
+                        <box-icon name="home"></box-icon>&nbsp;
+                        Home
+                    </nuxt-link>
                 </li>
                 <li>
                     <section>
@@ -30,7 +32,10 @@
                         </p>
                         <ul>
                             <li v-for="(model, index) in models" :key="index">
-                                <a href="#" class="sidebar-items">{{model.name}}</a>
+                                <nuxt-link
+                                    :to="`/models/${model.name.toLowerCase()}`"
+                                    class="sidebar-items"
+                                >{{model.name}}</nuxt-link>
                             </li>
                         </ul>
                     </section>
@@ -102,7 +107,7 @@ export default Vue.extend({
             .sidebar-heading {
                 color: var(--vs-theme-text-color);
                 transition: color 0.15s ease;
-                cursor: pointer;
+                // cursor: pointer;
                 font-size: 1em;
                 font-weight: 700;
                 padding: 0.35rem 1.5rem 0.35rem 1.25rem;
@@ -113,6 +118,7 @@ export default Vue.extend({
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
+                text-decoration: none;
             }
             .sidebar-items {
                 margin-left: 36px;
