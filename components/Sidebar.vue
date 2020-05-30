@@ -29,7 +29,7 @@
                             <!-- <box-icon name="chevron-right" size="sm"></box-icon> -->
                         </p>
                         <ul>
-                            <li v-for="(model, index) in $store.state.system.models" :key="index">
+                            <li v-for="(model, index) in models" :key="index">
                                 <a href="#" class="sidebar-items">{{model.name}}</a>
                             </li>
                         </ul>
@@ -47,7 +47,6 @@
         </vs-alert>-->
         <a href="https://desolid.netlify.app/" target="_blank" class="bottom-panel">
             <box-icon type="solid" name="flame" size="sm" color="gray"></box-icon>&nbsp;by&nbsp;
-            <!-- <strong>desolid</strong>&nbsp;v1.2.0 -->
             <strong>DESOLID</strong>
         </a>
     </aside>
@@ -55,7 +54,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-export default Vue.extend({});
+
+const primitiveModels = ['User', 'File'];
+
+export default Vue.extend({
+    computed: {
+        models() {
+            return this.$store.state.system.models.filter((model: any) => primitiveModels.indexOf(model.name) == -1);
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>
