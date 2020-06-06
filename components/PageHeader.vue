@@ -2,7 +2,10 @@
     <header ref="header" class="header-page">
         <div class="header__content container">
             <div ref="flex" class="flex-header">
-                <h1 ref="title" id="header-title">{{title}}</h1>
+                <h1 ref="title" id="header-title">
+                    <box-icon :name="icon" size="md"></box-icon>
+                    &nbsp;{{title}}
+                </h1>
                 <div class="actions text">
                     <slot />
                 </div>
@@ -29,7 +32,7 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    props: ['title'],
+    props: ['title', 'icon'],
 });
 </script>
 <style lang="scss" scoped>
@@ -41,6 +44,7 @@ export default Vue.extend({
     width: 100%;
     position: absolute;
     background: var(--vs-theme-bg2);
+    text-transform: capitalize;
     .header__content {
         padding: 2rem 2.5rem;
         position: relative;
@@ -59,6 +63,9 @@ export default Vue.extend({
             justify-content: space-between;
             margin-bottom: 70px;
             h1 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 // font-size: 35px;
                 // margin: 0;
                 // padding: 13px 0 15px;
@@ -71,6 +78,14 @@ export default Vue.extend({
                 list-style: none;
                 padding-bottom: 13px;
                 margin: 0;
+                color: gray;
+                // &>span {
+                //     border-right-width: 6px;
+                //     border-right-color: grey;
+                //     border-right-style: solid;
+                //     margin-right: 3px;
+                //     padding-right: 3px;
+                // }
             }
         }
     }

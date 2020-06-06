@@ -24,6 +24,12 @@
                     </nuxt-link>
                 </li>
                 <li>
+                    <nuxt-link to="/users" class="sidebar-heading">
+                        <box-icon name="user"></box-icon>&nbsp;
+                        Users
+                    </nuxt-link>
+                </li>
+                <li>
                     <section>
                         <p class="sidebar-heading">
                             <box-icon name="data"></box-icon>&nbsp;
@@ -33,16 +39,18 @@
                         <ul>
                             <li v-for="(model, index) in models" :key="index">
                                 <nuxt-link
-                                    :to="`/models/${model.name.toLowerCase()}`"
+                                    :to="`/models/${model.pluralName}`"
                                     class="sidebar-items"
                                 >{{model.name}}</nuxt-link>
                             </li>
                         </ul>
                     </section>
                 </li>
-                <li class="sidebar-heading">
-                    <box-icon name="images"></box-icon>&nbsp;
-                    Files
+                <li>
+                    <nuxt-link to="/files" class="sidebar-heading">
+                        <box-icon name="images"></box-icon>&nbsp;
+                        Files
+                    </nuxt-link>
                 </li>
             </ul>
         </div>
@@ -85,6 +93,7 @@ export default Vue.extend({
 .sidebar {
     padding: 1.5rem 0;
     background: var(--vs-theme-layout);
+    border-bottom-right-radius: 48px;
     width: 260px;
     position: fixed;
     z-index: 10;

@@ -31,7 +31,6 @@ export default Vue.extend({
     margin-top: 57px;
     position: relative;
     margin-bottom: 0;
-    padding-top: 200px !important;
     transition: all 0.25s ease;
     width: calc(100% - 260px);
 }
@@ -68,5 +67,21 @@ h2 {
 .container {
     max-width: 900px;
     margin: 0 auto;
+}
+
+</style>
+<style lang="scss">
+.content {
+    padding-top: 232px !important;
+    padding: 2rem 2.5rem;
+    p {
+        padding: 5px 20px;
+        margin: 0;
+        z-index: 200;
+        position: relative;
+        line-height: 1.7;
+        font-size: 0.85rem;
+    }
+    min-height: calc(100vh - 200px);
 }
 </style>

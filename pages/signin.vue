@@ -50,6 +50,9 @@ export default Vue.extend({
         hasError: false,
         loading: false,
     }),
+    mounted() {
+        localStorage.clear();
+    },
     methods: {
         ...mapActions('auth', ['authenticate']),
         async signin(event: Event) {

@@ -1,6 +1,6 @@
 <template>
     <div class="navbar">
-        <a href="/" class="brand">
+        <nuxt-link to="/" class="brand">
             <img
                 src="https://desolid.netlify.app/logo_outline.png"
                 alt="Desolid"
@@ -8,7 +8,7 @@
                 height="32"
             />
             <span class="brand-title">D E S O L I D</span>
-        </a>
+        </nuxt-link>
         <div>
             <UserNav />
         </div>

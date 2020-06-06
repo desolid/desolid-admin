@@ -3,7 +3,7 @@ import * as store from 'store2';
 import { plural } from 'pluralize';
 import gql from 'graphql-tag';
 import backend from '@/utils/backend';
-import { IModel } from '~/types';
+import { IModel, IQuery } from '~/types';
 
 const storage = store.namespace('system');
 
@@ -11,39 +11,27 @@ const storage = store.namespace('system');
     stateFactory: true,
     namespaced: true,
 })
-export default class System extends VuexModule {
-    models = [];
-
-    get info() {
-        return storage.get('info');
-    }
-
-    @Mutation
-    setModels(value: IModel[]) {
-        this.models = value.map((model) => ({
-            ...model,
-            pluralName: plural(model.name).toLowerCase(),
-        }));
-    }
-
+export default class Model extends VuexModule {
     @Action({ rawError: true })
-    async getInfo() {
-        const result = await backend.query({
-            query: gql`
+    async readAll({ pluralName }: IModel, query: IQuery) {
+        return backend
+            .query({
+                query: gql`
                 {
-                    system {
-                        version
-                        adminUserExists
+                    ${pluralName}(where: {}, limit: 120) {
+                        id
+                        name
+                        createdAt
+                        posts {
+                            id
+                            title
+                            createdAt
+                        }
                     }
                 }
             `,
-            fetchPolicy: 'no-cache',
-        });
-        const {
-            data: { system },
-        } = result;
-        storage.set('info', system);
-        return system;
+            })
+            .then((res) => res.data[pluralName]);
     }
     @Action({ rawError: true })
     async getModels() {
