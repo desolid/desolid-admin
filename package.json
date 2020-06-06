@@ -28,7 +28,7 @@
     "nuxt": "^2.0.0",
     "pluralize": "^8.0.0",
     "store2": "^2.11.2",
-    "vuesax": "^4.0.1-alpha.8",
+    "vuesax": "^4.0.1-alpha.20",
     "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {

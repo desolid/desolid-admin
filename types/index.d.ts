@@ -1,6 +1,10 @@
 export interface IField {
     name: string;
     type: string;
+    isScalar: boolean;
+    isString: boolean;
+    list: boolean;
+    relationType: string;
 }
 
 export interface IModel {

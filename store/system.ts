@@ -56,6 +56,10 @@ export default class System extends VuexModule {
                             fields {
                                 name
                                 type
+                                isScalar
+                                isString
+                                list
+                                relationType
                             }
                         }
                     }
