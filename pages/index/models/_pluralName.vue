@@ -8,9 +8,10 @@
             :show="showCreateModelDialg"
             :model="model"
             @closed="showCreateModelDialg=false"
+            @created="reload"
         />
         <div class="container content">
-            <DataTable :model="model" :records="records" />
+            <DataTable :model="model" :records="records" :loading="loading" />
         </div>
     </div>
 </template>
@@ -33,12 +34,24 @@ export default Vue.extend({
         };
     },
     data: () => ({
-        showCreateModelDialg: true,
+        showCreateModelDialg: false,
+        loading: false,
     }),
     components: {
         PageHeader,
         DataTable,
         CreateModelDialog,
+    },
+    methods: {
+        async reload($event) {
+            // this.loading = true;
+            try {
+                this.records = await this.$store.dispatch('model/readAll', this.model);
+            } catch (error) {
+                alert(error.message);
+            }
+            // this.loading = false;
+        },
     },
 });
 </script>

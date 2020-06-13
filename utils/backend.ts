@@ -21,4 +21,14 @@ const link = setContext((_, { headers, ...context }) => {
 export default new ApolloClient<InMemoryCache>({
     link,
     cache: new InMemoryCache() as any,
+    defaultOptions: {
+        watchQuery: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'ignore',
+        },
+        query: {
+            fetchPolicy: 'no-cache',
+            errorPolicy: 'all',
+        },
+    },
 });

@@ -50,6 +50,7 @@ html {
         margin-top: 32px;
         .vs-select__label--label {
             margin-left: 38px;
+            z-index: 10;
         }
     }
     .vs-input-content--has-label {

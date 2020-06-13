@@ -1,6 +1,6 @@
 
 <template>
-    <vs-dialog v-model="open">
+    <vs-dialog v-model="open" :loading="loading" :not-close="loading" dark>
         <template #header>
             <h4 class="not-margin">
                 Create a new
@@ -48,7 +48,7 @@
         </form>
         <template>
             <br />
-            <vs-button block color="dark" :loading="loading">Create {{model.name}}</vs-button>
+            <vs-button block color="dark" @click="create">Create {{model.name}}</vs-button>
         </template>
     </vs-dialog>
 </template>
@@ -77,13 +77,11 @@ const FIELD_TYPE_TO_ICON = {
 };
 
 export default Vue.extend({
-    props: {
-        show: Boolean,
-        model: Object,
-    },
+    props: ['show', 'model'],
     data: () => ({
         record: {},
         loading: false,
+        enumFieldName: '',
         enumField: '',
     }),
     computed: {
@@ -100,14 +98,35 @@ export default Vue.extend({
         },
         fields() {
             return (this.model.fields as IField[])
-                .filter((field) => !field.readonly)
+                .filter((field) => !field.readonly && !field.relationType)
                 .map((field) => {
+                    if (field.values) {
+                        this.enumField = field.values[0];
+                        this.enumFieldName = field.name;
+                    }
                     return {
                         ...field,
                         input: FIELD_TYPE_TO_INPUT_TYPE[field.type] || 'pensil',
                         icon: FIELD_TYPE_TO_ICON[field.type] || 'pencil',
                     };
                 });
+        },
+    },
+    methods: {
+        async create() {
+            this.loading = true;
+            try {
+                const record = { ...this.record };
+                if (this.enumField) {
+                    record[this.enumFieldName] = this.enumField;
+                }
+                const result = await this.$store.dispatch('model/create', { model: this.model, record });
+                this.$emit('created', result);
+                this.open = false;
+            } catch (error) {
+                alert(error.message);
+            }
+            this.loading = false;
         },
     },
 });

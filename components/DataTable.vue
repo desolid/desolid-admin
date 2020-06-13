@@ -1,6 +1,6 @@
 <template>
     <div class="data-table">
-        <vs-table striped>
+        <vs-table ref="table" striped>
             <template #thead>
                 <vs-tr>
                     <vs-th v-for="(field,index) in fields" :key="index">{{field.name}}</vs-th>
@@ -12,7 +12,7 @@
                 </vs-tr>
             </template>
             <template #footer>
-                <vs-pagination v-model="page" :length="$vs.getLength(records.data, max)" dark/>
+                <vs-pagination v-model="page" :length="$vs.getLength(records.data, max)" dark />
             </template>
         </vs-table>
     </div>
@@ -21,16 +21,29 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-    props: ['model','records'],
+    props: ['model', 'records', 'loading'],
     data: () => ({
         page: 1,
         max: 10,
+        loader: undefined,
     }),
     computed: {
         fields() {
-            return this.model.fields.filter(field => field.isScalar && field.type != 'Password');
-        }
-    }
+            return this.model.fields.filter((field) => field.isScalar && field.type != 'Password');
+        },
+    },
+    watch: {
+        loading(value) {
+            if (value) {
+                this.loader = this.$vs.loading({
+                    target: this.$refs.table.$el,
+                    color: 'dark',
+                });
+            } else {
+                this.loader?.close();
+            }
+        },
+    },
 });
 </script>
 

@@ -12,6 +12,24 @@ const storage = store.namespace('system');
 })
 export default class Model extends VuexModule {
     @Action({ rawError: true })
+    async create({ model, record }: { model: IModel; record: any }) {
+        const fields = model.fields.filter((field) => !field.readonly && !field.relationType);
+        const { data } = await backend.mutate({
+            mutation: gql`
+                mutation create(${fields.map((field) => `$${field.name}: ${field.type}!`).join(',')}) {
+                    create${model.name}( data: { ${fields
+                .map((field) => `${field.name}: $${field.name}`)
+                .join(',')} }) {
+                        id,
+                        createdAt
+                    }
+                }
+            `,
+            variables: record,            
+        });
+        return data[`create${model.pluralName}`];
+    }
+    @Action({ rawError: true })
     async readAll(model: IModel, query: IQuery) {
         const { data } = await backend.query({
             query: gql`
