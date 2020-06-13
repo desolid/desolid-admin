@@ -33,7 +33,7 @@ export default Vue.extend({
         };
     },
     data: () => ({
-        showCreateModelDialg: false,
+        showCreateModelDialg: true,
     }),
     components: {
         PageHeader,

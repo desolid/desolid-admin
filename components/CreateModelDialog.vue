@@ -23,6 +23,17 @@
                         :value="value"
                     >{{value}}</vs-option>
                 </vs-select>
+                <div v-else-if="field.type == 'Boolean'" class="desolid-checkbox">
+                    <label>{{field.name}}</label>
+                    <vs-switch v-model="record[field.name]" :label="field.name" primary>
+                        <template #off>
+                            <box-icon name="x" color="#606161"></box-icon>
+                        </template>
+                        <template #on>
+                            <box-icon name="check" color="#ddd"></box-icon>
+                        </template>
+                    </vs-switch>
+                </div>
                 <vs-input
                     v-else
                     :type="field.input"

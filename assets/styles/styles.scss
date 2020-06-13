@@ -41,7 +41,8 @@ html {
         text-transform: capitalize;
     }
     .vs-button,
-    .vs-input-parent {
+    .vs-input-parent,
+    .desolid-checkbox {
         margin-top: 23px;
     }
 
@@ -61,4 +62,12 @@ html {
 
 b {
     font-weight: 800;
+}
+
+.desolid-checkbox {
+    display: flex;
+    justify-content: space-between;
+    label {
+        // font-size: smaller;
+    }
 }
