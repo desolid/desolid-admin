@@ -17,7 +17,7 @@ export default class Model extends VuexModule {
             query: gql`
                 {
                     ${model.pluralName}(where: {}, limit: 120) {
-                        ${model.fields.filter(field => field.isScalar).map(field => field.name).join(',')}
+                        ${model.fields.filter(field => field.isScalar && field.type != 'Password').map(field => field.name).join(',')}
                     }
                     ${model.pluralName}Connection(where: {}) {
                         aggregate {

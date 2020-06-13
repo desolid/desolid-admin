@@ -24,12 +24,6 @@
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/users" class="sidebar-heading">
-                        <box-icon name="user"></box-icon>&nbsp;
-                        Users
-                    </nuxt-link>
-                </li>
-                <li>
                     <section>
                         <p class="sidebar-heading">
                             <box-icon name="data"></box-icon>&nbsp;
@@ -68,7 +62,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-const primitiveModels = ['User', 'File'];
+const primitiveModels = ['File'];
 
 export default Vue.extend({
     computed: {

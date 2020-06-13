@@ -28,7 +28,7 @@ export default Vue.extend({
     }),
     computed: {
         fields() {
-            return this.model.fields.filter(field => field.isScalar);
+            return this.model.fields.filter(field => field.isScalar && field.type != 'Password');
         }
     }
 });
