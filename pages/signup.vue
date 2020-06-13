@@ -1,7 +1,7 @@
 
 
 <template>
-    <form class="signup card" @submit.prevent="signup">
+    <form class="desolid-form signup" @submit.prevent="signup">
         <header>
             <img src="/logo.png" alt="Desolid" class="logo" height="64" />
             <br />
@@ -33,7 +33,7 @@
             required
         >
             <template #icon>
-                <box-icon name="lock" color="#606161"></box-icon>
+                <box-icon name="key" color="#606161"></box-icon>
             </template>
         </vs-input>
         <br />
@@ -82,15 +82,7 @@ export default Vue.extend({
 
 <style lang="scss">
 .signup {
-    min-width: 360px;
     background-color: white;
     padding: 36px;
-    border-radius: 24px;
-    .vs-input {
-        width: 100% !important;
-    }
-    header {
-        text-align: center;
-    }
 }
 </style>

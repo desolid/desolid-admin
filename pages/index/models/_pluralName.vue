@@ -2,8 +2,13 @@
     <div>
         <PageHeader :title="model.pluralName" icon="data">
             <span>{{records.count}} Records</span>&nbsp;|
-            <vs-button @click="true" success>Create</vs-button>
+            <vs-button @click="showCreateModelDialg = true" dark>Create</vs-button>
         </PageHeader>
+        <CreateModelDialog
+            :show="showCreateModelDialg"
+            :model="model"
+            @closed="showCreateModelDialg=false"
+        />
         <div class="container content">
             <DataTable :model="model" :records="records" />
         </div>
@@ -14,6 +19,7 @@
 import Vue from 'vue';
 import PageHeader from '~/components/PageHeader.vue';
 import DataTable from '~/components/DataTable.vue';
+import CreateModelDialog from '~/components/CreateModelDialog.vue';
 import backend from '@/utils/backend';
 import gql from 'graphql-tag';
 
@@ -26,9 +32,13 @@ export default Vue.extend({
             records,
         };
     },
+    data: () => ({
+        showCreateModelDialg: false,
+    }),
     components: {
         PageHeader,
         DataTable,
+        CreateModelDialog,
     },
 });
 </script>

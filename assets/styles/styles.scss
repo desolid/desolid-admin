@@ -27,3 +27,38 @@ html {
     background: var(--vs-theme-bg2);
 }
 
+.desolid-form {
+    min-width: 360px;
+    border-radius: 24px;
+    padding: 16px;
+    .vs-input,
+    .vs-select,
+    .vs-select-content {
+        width: 100% !important;
+        max-width: 100%;
+    }
+    label {
+        text-transform: capitalize;
+    }
+    .vs-button,
+    .vs-input-parent {
+        margin-top: 23px;
+    }
+
+    .vs-select-content {
+        margin-top: 32px;
+        .vs-select__label--label {
+            margin-left: 38px;
+        }
+    }
+    .vs-input-content--has-label {
+        margin-top: 16px;
+    }
+    header {
+        text-align: center;
+    }
+}
+
+b {
+    font-weight: 800;
+}

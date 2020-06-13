@@ -12,7 +12,7 @@
                 </vs-tr>
             </template>
             <template #footer>
-                <vs-pagination v-model="page" :length="$vs.getLength(records.data, max)" />
+                <vs-pagination v-model="page" :length="$vs.getLength(records.data, max)" dark/>
             </template>
         </vs-table>
     </div>

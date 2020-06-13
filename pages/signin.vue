@@ -1,7 +1,7 @@
 
 
 <template>
-    <form class="signin card" @submit.prevent="signin">
+    <form class="desolid-form signin" @submit.prevent="signin">
         <header>
             <img src="/logo.png" alt="Desolid" class="logo" height="64" />
             <br />
@@ -14,11 +14,9 @@
             </template>
             <template #title>Authentication failed !</template>
         </vs-alert>
-        <br />
         <vs-input type="email" v-model="email" placeholder="email" name="email" required>
             <template #icon>@</template>
         </vs-input>
-        <br />
         <vs-input
             type="password"
             v-model="password"
@@ -27,10 +25,9 @@
             required
         >
             <template #icon>
-                <box-icon name="lock" color="#606161"></box-icon>
+                <box-icon name="key" color="#606161"></box-icon>
             </template>
         </vs-input>
-        <br />
         <vs-button block color="dark" :loading="loading">Sign in</vs-button>
     </form>
 </template>
@@ -80,15 +77,7 @@ export default Vue.extend({
 
 <style lang="scss">
 .signin {
-    min-width: 360px;
     background-color: white;
     padding: 36px;
-    border-radius: 24px;
-    .vs-input {
-        width: 100% !important;
-    }
-    header {
-        text-align: center;
-    }
 }
 </style>

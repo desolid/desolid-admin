@@ -4,6 +4,8 @@ export interface IField {
     isScalar: boolean;
     isString: boolean;
     list: boolean;
+    readonly: boolean;
+    values: string[] | undefined;
     relationType: string;
 }
 

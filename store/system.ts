@@ -58,8 +58,10 @@ export default class System extends VuexModule {
                                 type
                                 isScalar
                                 isString
+                                readonly
                                 list
                                 relationType
+                                values
                             }
                         }
                     }
