@@ -11,6 +11,7 @@ const storage = store.namespace('system');
     namespaced: true,
 })
 export default class Model extends VuexModule {
+    public queryLimit = 10;
     @Action({ rawError: true })
     async create({ model, record }: { model: IModel; record: any }) {
         const fields = model.fields.filter((field) => !field.readonly && !field.relationType);
@@ -25,16 +26,16 @@ export default class Model extends VuexModule {
                     }
                 }
             `,
-            variables: record,            
+            variables: record,
         });
         return data[`create${model.pluralName}`];
     }
     @Action({ rawError: true })
-    async readAll(model: IModel, query: IQuery) {
+    async readAll({ model, page }: { model: IModel; page: number }) {
         const { data } = await backend.query({
             query: gql`
                 {
-                    ${model.pluralName}(where: {}, limit: 120) {
+                    ${model.pluralName}(where: {}, limit: ${this.queryLimit}, offset: ${(page - 1) * this.queryLimit}) {
                         ${model.fields
                             .filter((field) => field.isScalar && field.type != 'Password')
                             .map((field) => field.name)

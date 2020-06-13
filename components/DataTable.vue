@@ -12,35 +12,39 @@
                 </vs-tr>
             </template>
             <template #footer>
-                <vs-pagination v-model="page" :length="$vs.getLength(records.data, max)" dark />
+                <vs-pagination
+                    v-model="currentPage"
+                    :length="$vs.getLength({ length: records.count }, queryLimit)"
+                    dark
+                />
             </template>
         </vs-table>
     </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 export default Vue.extend({
-    props: ['model', 'records', 'loading'],
+    props: ['model', 'records', 'loading', 'page'],
     data: () => ({
-        page: 1,
-        max: 10,
         loader: undefined,
+        currentPage: 1,
     }),
+    mounted() {
+        this.currentPage = this.page;
+        console.log(this.$vs)
+    },
     computed: {
+        ...mapState('model', ['queryLimit']),
         fields() {
             return this.model.fields.filter((field) => field.isScalar && field.type != 'Password');
         },
     },
     watch: {
-        loading(value) {
-            if (value) {
-                this.loader = this.$vs.loading({
-                    target: this.$refs.table.$el,
-                    color: 'dark',
-                });
-            } else {
-                this.loader?.close();
+        currentPage(value) {
+            if (value != this.page) {
+                this.$emit('page-changed', value);
             }
         },
     },

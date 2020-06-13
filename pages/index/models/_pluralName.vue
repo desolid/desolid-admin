@@ -8,10 +8,17 @@
             :show="showCreateModelDialg"
             :model="model"
             @closed="showCreateModelDialg=false"
-            @created="reload"
+            @created="reload(page)"
         />
         <div class="container content">
-            <DataTable :model="model" :records="records" :loading="loading" />
+            {{page}}{{$route.path}}
+            <DataTable
+                :model="model"
+                :records="records"
+                :page="page"
+                :loading="loading"
+                @page-changed="goTo($event)"
+            />
         </div>
     </div>
 </template>
@@ -25,12 +32,14 @@ import backend from '@/utils/backend';
 import gql from 'graphql-tag';
 
 export default Vue.extend({
-    async asyncData({ store, params }) {
+    async asyncData({ store, params, query }) {
+        const page = query.page || 1;
         const model = store.state.system.models.find((model) => model.pluralName == params.pluralName);
-        const records = await store.dispatch('model/readAll', model);
+        const records = await store.dispatch('model/readAll', { model, page });
         return {
             model,
             records,
+            page,
         };
     },
     data: () => ({
@@ -43,14 +52,22 @@ export default Vue.extend({
         CreateModelDialog,
     },
     methods: {
-        async reload($event) {
-            // this.loading = true;
+        async reload() {
+            const loader = this.$vs.loading({ color: 'dark' });
             try {
-                this.records = await this.$store.dispatch('model/readAll', this.model);
+                this.records = await this.$store.dispatch('model/readAll', {
+                    model: this.model,
+                    page: this.page,
+                });
             } catch (error) {
                 alert(error.message);
             }
-            // this.loading = false;
+            loader.$root.$el.parentNode.removeChild(loader.$root.$el);
+        },
+        async goTo(page) {
+            this.$router.push({ path: this.$route.path, query: { page } });
+            this.page = page;
+            this.reload();
         },
     },
 });
