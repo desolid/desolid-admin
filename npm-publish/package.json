@@ -1,0 +1,34 @@
+{
+  "name": "desolid-admin",
+  "version": "1.1.0",
+  "description": "🤖 Desolid: Admin panel",
+  "homepage": "https://desolid.netlify.app/",
+  "repository": "git@github.com:desolid/desolid.git",
+  "author": "Sajjad Shirazy <shirazy.sajjad@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+      "Desolid",
+      "BaaS",
+      "GraphQL",
+      "S3",
+      "Authentication",
+      "Authorization",
+      "JWT",
+      "SQLite",
+      "MySQL",
+      "MariaDB",
+      "MS SQL Server",
+      "Postgressql"
+  ],
+  "main": "../dist/index.html",
+  "files": [
+      "../dist"
+  ],
+  "scripts": {
+    "build": "cd ../ && npx nuxt build",
+    "prepublish": "npm run build",
+    "release:patch": "standard-version --release-as patch && git push && git push --tags",
+    "release:minor": "standard-version --release-as minor && git push && git push --tags",
+    "release:major": "standard-version --release-as major && git push && git push --tags"
+  }
+}
