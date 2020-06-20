@@ -40,12 +40,12 @@
                         </ul>
                     </section>
                 </li>
-                <li>
+                <!-- <li>
                     <nuxt-link to="/files" class="sidebar-heading">
                         <box-icon name="images"></box-icon>&nbsp;
                         Files
                     </nuxt-link>
-                </li>
+                </li> -->
             </ul>
         </div>
         <!-- <vs-alert>
@@ -62,7 +62,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-const primitiveModels = ['File'];
+const primitiveModels = [];
 
 export default Vue.extend({
     computed: {

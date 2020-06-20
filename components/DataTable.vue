@@ -9,6 +9,12 @@
             <template #tbody>
                 <vs-tr :key="i" v-for="(tr, i) in records.data" :data="tr">
                     <vs-td v-for="(field,index) in fields" :key="index">{{tr[field.name]}}</vs-td>
+                    <template #expand>
+                        <div class="row-expand">
+                            <vs-button border info>Edit {{model.name}}</vs-button>
+                            <vs-button border danger>Remove {{model.name}}</vs-button>
+                        </div>
+                    </template>
                 </vs-tr>
             </template>
             <template #footer>
@@ -33,7 +39,7 @@ export default Vue.extend({
     }),
     mounted() {
         this.currentPage = this.page;
-        console.log(this.$vs)
+        console.log(this.$vs);
     },
     computed: {
         ...mapState('model', ['queryLimit']),
@@ -58,6 +64,10 @@ export default Vue.extend({
     border-radius: 12px;
     th {
         font-weight: bold !important;
+    }
+    .row-expand {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 </style>
