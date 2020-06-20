@@ -1,7 +1,6 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
 import * as store from 'store2';
-import gql from 'graphql-tag';
-import backend from '@/utils/backend';
+import { safeQuery, safeMutation } from '@/utils/backend';
 
 const storage = store.namespace('auth');
 
@@ -11,7 +10,7 @@ const storage = store.namespace('auth');
 })
 export default class Auth extends VuexModule {
     user = storage.get('user');
-    
+
     @Mutation
     setUser(value) {
         this.user = value;
@@ -20,17 +19,16 @@ export default class Auth extends VuexModule {
 
     @Action({ rawError: true })
     async authenticate({ email, password }) {
-        const result = await backend.query({
-            query: gql`{
-                authenticate(email: "${email}", password: "${password}") {
-                    token
-                    user {
-                        id
-                        name
-                    }
+        this.context.commit('setUser', null);
+        const result = await safeQuery(/* GraphQL */ `{
+            authenticate(email: "${email}", password: "${password}") {
+                token
+                user {
+                    id
+                    name
                 }
-            }`,
-        });
+            }
+        }`);
         const {
             data: {
                 authenticate: { token, user },
@@ -42,13 +40,11 @@ export default class Auth extends VuexModule {
 
     @Action({ rawError: true })
     async createUser({ name, email, password, group }) {
-        const result = await backend.mutate({
-            mutation: gql`mutation {
-                createUser(data: { name: "${name}", email: "${email}", password: "${password}", group: ${group} }) {
-                    id
-                }
-            }`,
-        });
+        const result = await safeMutation(/* GraphQL */ `mutation {
+            createUser(data: { name: "${name}", email: "${email}", password: "${password}", group: ${group} }) {
+                id
+            }
+        }`);
         const {
             data: {
                 createUser: { id },

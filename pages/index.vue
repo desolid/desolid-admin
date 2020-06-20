@@ -11,9 +11,9 @@ export default Vue.extend({
     middleware: [
         'auth',
         /**
-         * Loading medels list
+         * Loading models list
          */
-        async ({ store }) => {
+        async ({ store, redirect }) => {
             await store.dispatch('system/getModels');
         },
     ],

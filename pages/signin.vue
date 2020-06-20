@@ -40,7 +40,7 @@ import { mapActions } from 'vuex';
 
 export default Vue.extend({
     layout: 'gateway',
-    middleware: 'systemStatus',
+    middleware: ['clearStorage', 'systemStatus'],
     data: () => ({
         email: '',
         password: '',

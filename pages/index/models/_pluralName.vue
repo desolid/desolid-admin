@@ -11,7 +11,6 @@
             @created="reload(page)"
         />
         <div class="container content">
-            {{page}}{{$route.path}}
             <DataTable
                 :model="model"
                 :records="records"
@@ -28,7 +27,6 @@ import Vue from 'vue';
 import PageHeader from '~/components/PageHeader.vue';
 import DataTable from '~/components/DataTable.vue';
 import CreateModelDialog from '~/components/CreateModelDialog.vue';
-import backend from '@/utils/backend';
 import gql from 'graphql-tag';
 
 export default Vue.extend({

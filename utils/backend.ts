@@ -1,8 +1,9 @@
 import 'cross-fetch/polyfill';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, OperationVariables, ApolloQueryResult } from 'apollo-client';
 import { createUploadLink } from 'apollo-upload-client';
 import { setContext } from 'apollo-link-context';
+import gql from 'graphql-tag';
 import * as store from 'store2';
 
 const API_URL = document.getElementById('API_URL').getAttribute('content');
@@ -18,7 +19,7 @@ const link = setContext((_, { headers, ...context }) => {
     };
 }).concat(createUploadLink({ uri: API_URL }));
 
-export default new ApolloClient<InMemoryCache>({
+export const client = new ApolloClient<InMemoryCache>({
     link,
     cache: new InMemoryCache() as any,
     defaultOptions: {
@@ -32,3 +33,42 @@ export default new ApolloClient<InMemoryCache>({
         },
     },
 });
+
+/**
+ * Throws Error in case of requests errors
+ * @param type
+ * @param query
+ * @param variables
+ */
+async function safeRequest<T = any>(
+    type: 'query' | 'mutation',
+    query: string,
+    variables?: OperationVariables,
+): Promise<ApolloQueryResult<T>> {
+    try {
+        return await client[type]({ [type]: gql(query), variables, errorPolicy: 'none' });
+    } catch (error) {
+        const [graphqlError] = error?.graphQLErrors;
+        throw { code: graphqlError?.extensions?.code, message: graphqlError?.message };
+    }
+}
+
+/**
+ * Throws Error in case of query errors
+ * @param type
+ * @param query
+ * @param variables
+ */
+export async function safeQuery<T = any>(query: string, variables?: OperationVariables) {
+    return safeRequest<T>('query', query, variables);
+}
+
+/**
+ * Throws Error in case of mutation errors
+ * @param type
+ * @param query
+ * @param variables
+ */
+export async function safeMutation<T = any>(query: string, variables?: OperationVariables) {
+    return safeRequest<T>('mutation', query, variables);
+}

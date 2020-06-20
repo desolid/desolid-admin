@@ -15,18 +15,13 @@ import { mapActions } from 'vuex';
 export default Vue.extend({
     props: ['error'],
     layout: 'default', // you can set a custom layout for the error page
-    async beforeMount() {
-        if (this.error.graphQLErrors?.length > 0) {
-            this.error.graphQLErrors.forEach((error) => {
-                switch (error.extensions?.code) {
-                    case 'UNAUTHENTICATED':
-                        localStorage.clear();
-                        this.$router.go('/signin');
-                        break;
-                    default:
-                        break;
-                }
-            });
+    mounted() {
+        switch (this.error.code) {
+            case 'UNAUTHENTICATED':
+                this.$store.dispatch('auth/signout');
+                this.$router.push('signin');
+                // location.href = '/signin';
+                break;
         }
     },
 });

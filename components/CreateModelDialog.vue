@@ -53,7 +53,6 @@
     </vs-dialog>
 </template>
 <script lang="ts">
-import Vue from 'vue';
 import { IModel, IField } from '../types';
 
 const FIELD_TYPE_TO_INPUT_TYPE = {
@@ -76,7 +75,7 @@ const FIELD_TYPE_TO_ICON = {
     Password: 'key',
 };
 
-export default Vue.extend({
+export default {
     props: ['show', 'model'],
     data: () => ({
         record: {},
@@ -91,6 +90,7 @@ export default Vue.extend({
             },
             set(value) {
                 if (value) {
+                    // TODO
                 } else {
                     this.$emit('closed');
                 }
@@ -129,6 +129,6 @@ export default Vue.extend({
             this.loading = false;
         },
     },
-});
+};
 </script>
         

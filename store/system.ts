@@ -1,8 +1,7 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
 import * as store from 'store2';
 import { plural } from 'pluralize';
-import gql from 'graphql-tag';
-import backend from '@/utils/backend';
+import { safeQuery } from '@/utils/backend';
 import { IModel } from '~/types';
 
 const storage = store.namespace('system');
@@ -28,17 +27,14 @@ export default class System extends VuexModule {
 
     @Action({ rawError: true })
     async getInfo() {
-        const result = await backend.query({
-            query: gql`
-                {
-                    system {
-                        version
-                        adminUserExists
-                    }
+        const result = await safeQuery(/* GraphQL */ `
+            {
+                system {
+                    version
+                    adminUserExists
                 }
-            `,
-            fetchPolicy: 'no-cache',
-        });
+            }
+        `);
         const {
             data: { system },
         } = result;
@@ -47,28 +43,25 @@ export default class System extends VuexModule {
     }
     @Action({ rawError: true })
     async getModels() {
-        const result = await backend.query({
-            query: gql`
-                {
-                    system {
-                        models {
+        const result = await safeQuery(/* GraphQL */ `
+            {
+                system {
+                    models {
+                        name
+                        fields {
                             name
-                            fields {
-                                name
-                                type
-                                isScalar
-                                isString
-                                readonly
-                                list
-                                relationType
-                                values
-                            }
+                            type
+                            isScalar
+                            isString
+                            readonly
+                            list
+                            relationType
+                            values
                         }
                     }
                 }
-            `,
-            fetchPolicy: 'no-cache',
-        });
+            }
+        `);
         const {
             data: {
                 system: { models },
