@@ -35,6 +35,16 @@
                     </vs-switch>
                 </div>
                 <vs-input
+                    v-else-if="field.type == 'File'"
+                    :type="field.input"
+                    @change="onFileInputChange($event, field.name)"
+                    :label="field.name"
+                >
+                    <template #icon>
+                        <box-icon :name="field.icon" color="#606161"></box-icon>
+                    </template>
+                </vs-input>
+                <vs-input
                     v-else
                     :type="field.input"
                     v-model="record[field.name]"
@@ -62,6 +72,7 @@ const FIELD_TYPE_TO_INPUT_TYPE = {
     Float: 'number',
     DateTime: 'date',
     EmailAddress: 'email',
+    File: 'file',
     Password: 'password',
 };
 
@@ -98,7 +109,7 @@ export default {
         },
         fields() {
             return (this.model.fields as IField[])
-                .filter((field) => !field.readonly && !field.relationType)
+                .filter((field) => (!field.readonly && !field.relationType) || field.type == 'File')
                 .map((field) => {
                     if (field.values) {
                         this.enumField = field.values[0];
@@ -127,6 +138,11 @@ export default {
                 alert(error.message);
             }
             this.loading = false;
+        },
+        onFileInputChange(event: any, fieldName: string) {
+            if (event.target.files?.length > 0) {
+                this.record[fieldName] = event.target.files[0];
+            }
         },
     },
 };

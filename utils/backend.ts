@@ -44,9 +44,22 @@ async function safeRequest<T = any>(
     type: 'query' | 'mutation',
     query: string,
     variables?: OperationVariables,
-): Promise<ApolloQueryResult<T>> {
+) {
     try {
-        return await client[type]({ [type]: gql(query), variables, errorPolicy: 'none' });
+        switch (type) {
+            case 'query':
+                return await client.query<T>({
+                    query: gql(query),
+                    variables,
+                    errorPolicy: 'none',
+                });
+            case 'mutation':
+                return await client.mutate<T>({
+                    mutation: gql(query),
+                    variables,
+                    errorPolicy: 'none',
+                });
+        }
     } catch (error) {
         const [graphqlError] = error?.graphQLErrors;
         throw { code: graphqlError?.extensions?.code, message: graphqlError?.message };

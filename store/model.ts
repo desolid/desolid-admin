@@ -13,15 +13,21 @@ export default class Model extends VuexModule {
     public queryLimit = 10;
     @Action({ rawError: true })
     async create({ model, record }: { model: IModel; record: any }) {
-        const fields = model.fields.filter((field) => !field.readonly && !field.relationType);
-        const { data } = await safeMutation(/* GraphQL */ `
-            mutation create(${fields.map((field) => `$${field.name}: ${field.type}!`).join(',')}) {
+        const fields = model.fields.filter((field) => (!field.readonly && !field.relationType) || field.type == 'File');
+        const variablesDeclaration = fields
+            .map((field) => `$${field.name}: ${field.type == 'File' ? 'Upload' : field.type}!`)
+            .join(', ');
+        const { data } = await safeMutation(
+            /* GraphQL */ `
+            mutation create(${variablesDeclaration}) {
                 create${model.name}( data: { ${fields.map((field) => `${field.name}: $${field.name}`).join(',')} }) {
-                    id,
+                    id
                     createdAt
                 }
             }
-        `);
+        `,
+            record,
+        );
         return data[`create${model.pluralName}`];
     }
     @Action({ rawError: true })
