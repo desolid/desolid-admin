@@ -20,13 +20,10 @@
         "MS SQL Server",
         "Postgressql"
     ],
-    "main": "../dist/index.html",
-    "files": [
-        "../dist"
-    ],
+    "main": "index.html",
     "scripts": {
         "build": "cd ../ && npx nuxt build",
-        "prepublish": "npm run build",
+        "prepublish": "npm run build && mv ../dist ./dist",
         "release:patch": "npx standard-version --release-as patch && git push && git push --tags",
         "release:minor": "npx standard-version --release-as minor && git push && git push --tags",
         "release:major": "npx standard-version --release-as major && git push && git push --tags"
