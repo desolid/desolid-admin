@@ -1,6 +1,6 @@
 <template>
-    <div class="navbar">
-        <nuxt-link to="/" class="brand">
+    <vs-navbar center-collapsed v-model="active">
+        <template #left>
             <img
                 src="https://desolid.netlify.app/logo_outline.png"
                 alt="Desolid"
@@ -8,17 +8,28 @@
                 height="32"
             />
             <span class="brand-title">D E S O L I D</span>
+        </template>
+        <template #right>
+            <UserNav />
+        </template>
+    </vs-navbar>
+    <!-- <div class="navbar">
+        <nuxt-link to="/" class="brand">
+            <span class="brand-title">D E S O L I D</span>
         </nuxt-link>
         <div>
             <UserNav />
         </div>
-    </div>
+    </div>-->
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import UserNav from '~/components/UserNav.vue';
 export default Vue.extend({
+    data: () => ({
+        active: 'guide',
+    }),
     components: {
         UserNav,
     },
@@ -26,7 +37,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.navbar {
+.vs-navbar-content {
     position: fixed;
     z-index: 20000;
     top: 0;
@@ -45,19 +56,14 @@ export default Vue.extend({
     transition: all 0.25s ease;
     justify-content: space-between;
 }
-.brand {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    .brand-title {
-        margin-left: 6px;
-        // font-weight: 700;
-        font-size: 16px;
-        font-family: monospace;
-        background-color: black;
-        color: white;
-        border-radius: 3px;
-        padding: 3px 12px;
-    }
+.brand-title {
+    margin-left: 6px;
+    // font-weight: 700;
+    font-size: 16px;
+    font-family: monospace;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 12px;
 }
 </style>
