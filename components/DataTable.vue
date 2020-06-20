@@ -7,12 +7,22 @@
                 </vs-tr>
             </template>
             <template #tbody>
-                <vs-tr :key="i" v-for="(tr, i) in records.data" :data="tr">
-                    <vs-td v-for="(field,index) in fields" :key="index">{{tr[field.name]}}</vs-td>
+                <vs-tr :key="record.id" v-for="record in records.data" :data="record">
+                    <vs-td v-for="field in fields" :key="field.name">{{record[field.name]}}</vs-td>
                     <template #expand>
                         <div class="row-expand">
-                            <vs-button border info>Edit {{model.name}}</vs-button>
-                            <vs-button border danger>Remove {{model.name}}</vs-button>
+                            <vs-button
+                                border
+                                info
+                                @click="edit(record)"
+                                disabled
+                            >Edit {{model.name}}</vs-button>
+                            <vs-button
+                                border
+                                danger
+                                @click="remove(record.id)"
+                                :loading="deleteLoadings[record.id]"
+                            >Remove {{model.name}}</vs-button>
                         </div>
                     </template>
                 </vs-tr>
@@ -36,6 +46,7 @@ export default Vue.extend({
     data: () => ({
         loader: undefined,
         currentPage: 1,
+        deleteLoadings: {},
     }),
     mounted() {
         this.currentPage = this.page;
@@ -52,6 +63,17 @@ export default Vue.extend({
             if (value != this.page) {
                 this.$emit('page-changed', value);
             }
+        },
+    },
+    methods: {
+        edit(record: { id: string }) {
+            alert(`Edit ${record.id}`);
+        },
+        async remove(recordId: string | number) {
+            this.deleteLoadings[recordId] = true;
+            await this.$store.dispatch('model/remove', { model: this.model, recordId });
+            this.deleteLoadings[recordId] = false;
+            this.$emit('page-changed', this.page);
         },
     },
 });

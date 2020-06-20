@@ -17,6 +17,7 @@
                 :page="page"
                 :loading="loading"
                 @page-changed="goTo($event)"
+                @recordDeleted="goTo($event)"
             />
         </div>
     </div>

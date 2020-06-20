@@ -31,6 +31,23 @@ export default class Model extends VuexModule {
         return data[`create${model.pluralName}`];
     }
     @Action({ rawError: true })
+    async remove({ model, recordId }: { model: IModel; recordId: string | number }) {
+        const { data } = await safeMutation(
+            /* GraphQL */ `
+            mutation delete($id: ID!) {
+                delete${model.name}( where: { id: $id }) {
+                    id
+                    createdAt
+                }
+            }
+        `,
+            {
+                id: recordId,
+            },
+        );
+        return data[`delete${model.pluralName}`];
+    }
+    @Action({ rawError: true })
     async readAll({ model, page }: { model: IModel; page: number }) {
         const { data } = await safeQuery(/* GraphQL */ `
             {
