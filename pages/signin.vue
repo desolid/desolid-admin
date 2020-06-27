@@ -3,7 +3,7 @@
 <template>
     <form class="desolid-form signin" @submit.prevent="signin">
         <header>
-            <img src="/logo.png" alt="Desolid" class="logo" height="64" />
+            <img src="~/static/logo.png" alt="Desolid" class="logo" height="64" />
             <br />
         </header>
         <br />
