@@ -40,6 +40,9 @@ export default {
     modules: [
         // '@nuxtjs/pwa',
     ],
+    router: {
+        base: '/admin/',
+    },
     /*
      ** Build configuration
      */
