@@ -3,7 +3,7 @@
 <template>
     <form class="desolid-form signup" @submit.prevent="signup">
         <header>
-            <img src="~/static/logo.png" alt="Desolid" class="logo" height="64" />
+            <img :src="`${$router.options.base}logo.png`" alt="Desolid" class="logo" height="64" />
             <br />
         </header>
         <br />
