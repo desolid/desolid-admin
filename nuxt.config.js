@@ -3,6 +3,9 @@ export default {
     server: {
         port: 8000, // default: 3000
     },
+    env: {
+        API_URL: process.env.API_URL || 'http://localhost:3000',
+    },
     /*
      ** Headers of the page
      */
@@ -12,7 +15,6 @@ export default {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-            { id: 'API_URL', content: 'http://localhost:3000' },
         ],
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },

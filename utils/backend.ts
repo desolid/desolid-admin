@@ -6,7 +6,7 @@ import { setContext } from 'apollo-link-context';
 import gql from 'graphql-tag';
 import * as store from 'store2';
 
-const API_URL = document.getElementById('API_URL').getAttribute('content');
+const API_URL = window.location.origin == 'http://localhost:8000' ? process.env.API_URL : window.location.origin;
 
 const link = setContext((_, { headers, ...context }) => {
     const token = store.namespace('auth').get('token');
@@ -40,11 +40,7 @@ export const client = new ApolloClient<InMemoryCache>({
  * @param query
  * @param variables
  */
-async function safeRequest<T = any>(
-    type: 'query' | 'mutation',
-    query: string,
-    variables?: OperationVariables,
-) {
+async function safeRequest<T = any>(type: 'query' | 'mutation', query: string, variables?: OperationVariables) {
     try {
         switch (type) {
             case 'query':
