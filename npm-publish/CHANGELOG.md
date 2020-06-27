@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/desolid/desolid/compare/v1.1.5...v1.1.6) (2020-06-27)
+
+
+### Bug Fixes
+
+* router base ([2176f5b](https://github.com/desolid/desolid/commit/2176f5b2267893b1dd5823fa2625806d26370bd0))
+
 ### [1.1.5](https://github.com/desolid/desolid/compare/v1.1.4...v1.1.5) (2020-06-27)
 
 ### [1.1.4](https://github.com/desolid/desolid/compare/v1.1.3...v1.1.4) (2020-06-27)
