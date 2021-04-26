@@ -50,7 +50,7 @@
     "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "0.6.6",
+    "@nuxt/typescript-build": "2.1.0",
     "@types/jsonwebtoken": "8.5.0",
     "@types/pluralize": "0.0.29",
     "eslint-config-prettier": "6.11.0",
